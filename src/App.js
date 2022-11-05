@@ -1,7 +1,7 @@
 import './App.css';
 import BathroomList from './component/BathroomList';
 
-const bathroomList = [{name:"Bathroom 1", location:"Building 1"}, {name:"Bathroom 2", location:"Building 2"}]
+const bathroomList = [{name:"Bathroom 1", rating:5.0}, {name:"Bathroom 2", rating:4.7}]
 
 function App() {
   return (
