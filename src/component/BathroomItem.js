@@ -1,9 +1,11 @@
+import Button from '@mui/material/Button';
 
 const BathroomItem = (props) => {
     return (
         <div>
-            The name is: {props.bathroomItem.name} The location is: {props.bathroomItem.location}   
+            <Button variant = "contained" onClick= "toBathroomPage();">{props.bathroomItem.rating} The name is: {props.bathroomItem.name} </Button>  
         </div>
     );
+
 }
 export default BathroomItem;
