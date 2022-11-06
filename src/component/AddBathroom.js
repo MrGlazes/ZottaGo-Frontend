@@ -6,7 +6,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-
+import {useState} from 'react';
+import { collection, getDocs, query, doc, setDoc, addDoc } from "firebase/firestore"; 
 
 const style = {
     position: 'absolute',
@@ -21,6 +22,17 @@ const style = {
 };
 
 function AddBathroom(props) { 
+
+    const [building, setBuilding] = useState("DBH");
+    const [rating, setRating] = useState(1);
+
+    const submit = async () => {
+        console.log(building, rating);
+        await setDoc(doc(props.db, "bathrooms", building), {
+            building: building,
+            rating: rating,
+        });
+    }
      
     return (
         <Modal open={props.showModal} onClose={() => props.setModal(false)}>
@@ -28,25 +40,23 @@ function AddBathroom(props) {
             <div id="Name-Of-Building">
             <Typography variant="h6">Building Name:</Typography>
             </div>
-            <form>
-            <select id = "Building">
-                <option value="1">DBH</option>
-                <option value="2">SSH</option>
-                <option value="3">CS</option>
-                <option value="4">ENG</option>
+            <select id = "Building" onChange={e => setBuilding(e.target.value)}>
+                <option value="DBH">DBH</option>
+                <option value="SSH">SSH</option>
+                <option value="CS">CS</option>
+                <option value="ENG">ENG</option>
             </select>
             <div id="Rating">
             <Typography variant="h6">Rating:</Typography>
             </div>
-            <select id = "Rating">
+            <select id = "Rating" onChange={e => setRating(e.target.value)}>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
-            <input type = "submit" value="Submit"/>
-            </form>
+            <button onClick={submit}>Submit</button>
             </Box>
         </Modal>
     );

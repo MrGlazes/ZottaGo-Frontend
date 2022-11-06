@@ -45,7 +45,7 @@ function App() {
     let newArr = [];
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      newArr.push({name: doc.data().name});
+      newArr.push({name: doc.data().building, rating: doc.data().rating});
       console.log(doc.id, " => ", doc.data());
     });
     updateMyArray(newArr);
@@ -64,13 +64,13 @@ function App() {
           </Typography>
         </AppBar>
 
-        <BathroomList bathroomList={bathroomList}/>
+        <BathroomList bathroomList={arr}/>
         <Fab sx={style} onClick={() => setModal(true)}>
           <AddIcon/>
         </Fab>
       </div>
       <div>
-        {showModal && <AddBathroom showModal={showModal} setModal={setModal}></AddBathroom>}
+        {showModal && <AddBathroom showModal={showModal} setModal={setModal} db={db}></AddBathroom>}
       </div>
     </div>
   );
