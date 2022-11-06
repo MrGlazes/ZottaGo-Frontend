@@ -20,8 +20,8 @@ function BathroomPage(props) {
         aria-describedby="modal-modal-description">
             <Box sx={style}>
           <div id="modal-modal-title">
-            <Typography variant="h4">{props.bathroomItem.name}</Typography>
-            <Typography variant="h6">Rating: {props.bathroomItem.rating}</Typography>
+            <Typography variant="h4">{props.bathroomItem.name} on Floor {props.bathroomItem.floor}</Typography>
+            <Typography variant="h6">Rating: {props.bathroomItem.rating} {props.bathroomItem.floor}</Typography>
           </div>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <div>
