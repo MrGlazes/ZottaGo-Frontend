@@ -9,7 +9,6 @@ const BathroomItem = (props) => {
     return (
         <div>
             <Button variant = "contained" onClick={() => {props.setBathroomItem(props.bathroomItem); props.setModal(true);}}> {props.bathroomItem.rating} The name is: {props.bathroomItem.name} {props.bathroomItem.floor}</Button>  
-    
         </div>
     );
 
