@@ -2,6 +2,8 @@ import BathroomItem from "./BathroomItem.js";
 import React, { useState } from 'react';
 import BathroomPage from "./BathroomPage.js";
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+
 
 const BathroomList = (props) => {
     const [showModal, setModal] = useState(false);
@@ -9,6 +11,9 @@ const BathroomList = (props) => {
     return (
         <div>
             <Grid container>
+                <Grid item sx={{"width": "100%"}}>
+                    <Typography style={{top: '5%', left: '4%', textAlign: 'center', mt: '.5em'}} variant="h4">UCI Bathroom Reviews</Typography>
+                </Grid>
                 {props.bathroomList.map((bathroom) => {
                     return (
                         <Grid item sx={{"width": "100%", "mt": ".5em"}}>
