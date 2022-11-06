@@ -29,7 +29,7 @@ const bathroomList = [{name:"Bathroom", floor:1, rating:5.0, description:"Good"}
 
 const style = {
   position: 'fixed',
-  top: "60vh",
+  top: "80vh",
   left: '50vw',
   transform: "translate(-50%,50%)"
 };
