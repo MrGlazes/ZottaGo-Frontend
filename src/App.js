@@ -45,7 +45,12 @@ function App() {
     let newArr = [];
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      newArr.push({name: doc.data().building, rating: doc.data().rating});
+      newArr.push({
+        building: doc.data().building, 
+        rating: doc.data().rating,
+        floor: doc.data().floor,
+        userName: doc.data().userName
+      });
       console.log(doc.id, " => ", doc.data());
     });
     updateMyArray(newArr);
@@ -53,7 +58,7 @@ function App() {
 
   useEffect(() => {
     submit();
-  }, []);
+  }, [showModal]);
   
   return (
     <div>

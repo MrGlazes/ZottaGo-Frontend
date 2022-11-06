@@ -3,11 +3,17 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import {useState} from 'react';
-import { collection, getDocs, query, doc, setDoc, addDoc } from "firebase/firestore"; 
+import { doc, setDoc } from "firebase/firestore";
+import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import InputLabel from '@mui/material/InputLabel';
+import TextFeild from '@mui/material/TextField';
+import FormControl from '@mui/material/FormControl';
+import { v4 as uuidv4 } from 'uuid';
 
 const style = {
     position: 'absolute',
@@ -25,38 +31,79 @@ function AddBathroom(props) {
 
     const [building, setBuilding] = useState("DBH");
     const [rating, setRating] = useState(1);
+    const [userName, setUserName] = useState("Unknown");
+    const [floor, setFloor] = useState(1);
+
+    const handleUser = (event) => {
+        setUserName(event.target.value);
+    }
+
+    const handleFloor = (event) =>  {
+        setFloor(event.target.value);
+    }
 
     const submit = async () => {
-        console.log(building, rating);
-        await setDoc(doc(props.db, "bathrooms", building), {
+        console.log(building, rating, userName, floor);
+        await setDoc(doc(props.db, "bathrooms", uuidv4()), {
             building: building,
             rating: rating,
+            userName: userName,
+            floor: floor
         });
+        props.setModal(false);
     }
      
     return (
         <Modal open={props.showModal} onClose={() => props.setModal(false)}>
             <Box sx={style}>
-            <div id="Name-Of-Building">
-            <Typography variant="h6">Building Name:</Typography>
-            </div>
-            <select id = "Building" onChange={e => setBuilding(e.target.value)}>
-                <option value="DBH">DBH</option>
-                <option value="SSH">SSH</option>
-                <option value="CS">CS</option>
-                <option value="ENG">ENG</option>
-            </select>
-            <div id="Rating">
-            <Typography variant="h6">Rating:</Typography>
-            </div>
-            <select id = "Rating" onChange={e => setRating(e.target.value)}>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-            <button onClick={submit}>Submit</button>
+                <FormControl fullwidth>
+                <Grid container spacing={2}>
+
+                    <Grid item xs={8}>
+                    {/* <InputLabel id="buildinglabel">Building</InputLabel> */}
+                    <TextFeild
+                        sx={{"width": "100%"}} 
+                        label="Building"
+                        select
+                        id="Building" 
+                        value={building}
+                        onChange={e => setBuilding(e.target.value)}
+                    >
+                        <MenuItem value="DBH">DBH</MenuItem>
+                        <MenuItem value="SSH">SSH</MenuItem>
+                        <MenuItem value="CS">CS</MenuItem>
+                        <MenuItem value="ENG">ENG</MenuItem>
+                    </TextFeild>
+                    </Grid>
+
+                    <Grid item xs={8}>
+                        <TextField type="number" value={floor} onChange={handleFloor} id="outlined-basic" label="Floor Number" variant="outlined" />
+                    </Grid>
+
+                    <Grid item xs={8}>
+                    {/* <InputLabel id="ratinglabel">Rating</InputLabel> */}
+                    <TextFeild 
+                        sx={{"width": "100%"}} 
+                        label="Rate"
+                        select
+                        id="Rating" 
+                        value={rating}
+                        onChange={e => setRating(e.target.value)}
+                    >
+                        <MenuItem value="1">1</MenuItem>
+                        <MenuItem value="2">2</MenuItem>
+                        <MenuItem value="3">3</MenuItem>
+                        <MenuItem value="4">4</MenuItem>
+                        <MenuItem value="5">5</MenuItem>
+                    </TextFeild>
+                    </Grid>
+                    
+                    <Grid item xs={8}>
+                    <TextField value={userName} onChange={handleUser} id="outlined-basic" label="User Name" variant="outlined" />
+                    <Button variant="contained" size="large" onClick={submit}>Submit</Button>
+                    </Grid>
+                </Grid>
+                </FormControl>
             </Box>
         </Modal>
     );

@@ -1,19 +1,22 @@
 import BathroomItem from "./BathroomItem.js";
 import React, { useState } from 'react';
 import BathroomPage from "./BathroomPage.js";
+import Grid from '@mui/material/Grid';
 
 const BathroomList = (props) => {
     const [showModal, setModal] = useState(false);
     const [selectedBathroomItem, setBathroomItem] = useState({});
     return (
         <div>
-            <div>
+            <Grid container>
                 {props.bathroomList.map((bathroom) => {
                     return (
-                        <BathroomItem bathroomItem={bathroom} setModal={setModal} setBathroomItem={setBathroomItem}/>
+                        <Grid item sx={{"width": "100%", "mt": ".5em"}}>
+                            <BathroomItem bathroomItem={bathroom} setModal={setModal} setBathroomItem={setBathroomItem}/>
+                        </Grid>
                     );
                 })}                   
-            </div>
+            </Grid>
         <BathroomPage showModal={showModal} setModal={setModal} bathroomItem={selectedBathroomItem}></BathroomPage>
         </div>
     );

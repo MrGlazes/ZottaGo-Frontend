@@ -7,7 +7,13 @@ const BathroomItem = (props) => {
 
     return (
         <div>
-            <Button style={{width: '100%'}} variant = "contained" onClick={() => {props.setBathroomItem(props.bathroomItem); props.setModal(true);}}> {props.bathroomItem.name} is {props.bathroomItem.rating} stars </Button>  
+            <Button 
+                style={{width: '100%'}} 
+                variant = "contained" 
+                onClick={() => {props.setBathroomItem(props.bathroomItem); props.setModal(true);}}
+            > 
+                {props.bathroomItem.building} floor {props.bathroomItem.floor} is {props.bathroomItem.rating} stars 
+            </Button>  
         </div>
     );
 }

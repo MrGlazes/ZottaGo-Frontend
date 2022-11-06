@@ -21,20 +21,17 @@ function BathroomPage(props) {
         aria-describedby="modal-modal-description">
             <Box sx={style} className={Modal} style={{width: '80%'}}>
           <div id="modal-modal-title">
-            <Typography position="absolute" style={{top: '5%', left: '4%'}} variant="h4">{props.bathroomItem.name} on Floor {props.bathroomItem.floor}</Typography>
+            <Typography position="absolute" style={{top: '5%', left: '4%'}} variant="h4">{props.bathroomItem.building} on Floor {props.bathroomItem.floor}</Typography>
             <Typography position="absolute" style={{top: '5%', right: '4%'}} variant="h6">Rating: {props.bathroomItem.rating} / 5</Typography>
           </div>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <div>
-                Description:
             <br></br>
-                {props.bathroomItem.description}
+                {props.bathroomItem.userName} ranks this bathroom as {props.bathroomItem.rating} stars!
             </div><br></br>
             <div>
-                Reviews:
-                <br></br>
-              ***Text Holder*** Reviews
-              </div>
+              What do you think?
+            </div>
           </Typography>
         </Box>
         </Modal>
