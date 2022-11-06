@@ -7,7 +7,8 @@ import Menu from '@mui/material/Menu';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import {useState} from 'react';
-import { collection, getDocs, query, doc, setDoc, addDoc } from "firebase/firestore"; 
+import { collection, getDocs, query, doc, setDoc, addDoc } from "firebase/firestore";
+import { v4 as uuidv4 } from 'uuid';
 
 const style = {
     position: 'absolute',
@@ -28,10 +29,11 @@ function AddBathroom(props) {
 
     const submit = async () => {
         console.log(building, rating);
-        await setDoc(doc(props.db, "bathrooms", building), {
+        await setDoc(doc(props.db, "bathrooms", uuidv4()), {
             building: building,
             rating: rating,
         });
+        props.setModal(false);
     }
      
     return (
